@@ -2,25 +2,28 @@ cmake_minimum_required (VERSION 3.8)
 
 project (VulkanTutorial)
 
-include_directories(external)
-include_directories(external/glfw)
-include_directories(external/glm)
-include_directories(external/stb)
-include_directories(external/tinyobjloader)
+set(CMAKE_PREFIX_PATH C:/ProgramFiles/glfw
+                      C:/ProgramFiles/glm
+                      C:/ProgramFiles/tinyobjloader)
 
+set(stb_dir C:/ProgramHub/stb)
+
+include(CMakePrintHelpers)
+cmake_print_variables(CMAKE_PREFIX_PATH
+                      stb_dir)
+
+find_package (glfw3 REQUIRED)
+find_package (glm REQUIRED)
 find_package (Vulkan REQUIRED)
-# find_package (glfw3 REQUIRED)
-# find_package (glm REQUIRED)
-# find_package (tinyobjloader REQUIRED)
+find_package (tinyobjloader REQUIRED)
 
 find_package (PkgConfig)
 pkg_get_variable (STB_INCLUDEDIR stb includedir)
 if (NOT STB_INCLUDEDIR)
   unset (STB_INCLUDEDIR)
-  find_path (STB_INCLUDEDIR stb_image.h PATHS external/stb PATH_SUFFIXES stb)
+  find_path (STB_INCLUDEDIR stb_image.h PATHS ${stb_dir} PATH_SUFFIXES stb)
 endif ()
 
-include(CMakePrintHelpers)
 cmake_print_variables(STB_INCLUDEDIR)
 
 if (NOT STB_INCLUDEDIR)
@@ -123,67 +126,63 @@ add_chapter (17_swap_chain_recreation
   SHADER 09_shader_base)
 
 add_chapter (18_vertex_input
-  SHADER 18_shader_vertexbuffer)
-#  LIBS glm::glm)
+  SHADER 18_shader_vertexbuffer
+  LIBS glm::glm)
 
 add_chapter (19_vertex_buffer
-  SHADER 18_shader_vertexbuffer)
-#  LIBS glm::glm)
+  SHADER 18_shader_vertexbuffer
+  LIBS glm::glm)
 
 add_chapter (20_staging_buffer
-  SHADER 18_shader_vertexbuffer)
-#  LIBS glm::glm)
+  SHADER 18_shader_vertexbuffer
+  LIBS glm::glm)
 
 add_chapter (21_index_buffer
-  SHADER 18_shader_vertexbuffer)
-#  LIBS glm::glm)
+  SHADER 18_shader_vertexbuffer
+  LIBS glm::glm)
 
 add_chapter (22_descriptor_layout
-  SHADER 22_shader_ubo)
-#  LIBS glm::glm)
+  SHADER 22_shader_ubo
+  LIBS glm::glm)
 
 add_chapter (23_descriptor_sets
-  SHADER 22_shader_ubo)
-#  LIBS glm::glm)
+  SHADER 22_shader_ubo
+  LIBS glm::glm)
 
 add_chapter (24_texture_image
   SHADER 22_shader_ubo
-  TEXTURES ../images/texture.jpg)
-#  LIBS glm::glm)
+  TEXTURES ../images/texture.jpg
+  LIBS glm::glm)
 
 add_chapter (25_sampler
   SHADER 22_shader_ubo
-  TEXTURES ../images/texture.jpg)
-#  LIBS glm::glm)
+  TEXTURES ../images/texture.jpg
+  LIBS glm::glm)
 
 add_chapter (26_texture_mapping
   SHADER 26_shader_textures
-  TEXTURES ../images/texture.jpg)
-#  LIBS glm::glm)
+  TEXTURES ../images/texture.jpg
+  LIBS glm::glm)
 
 add_chapter (27_depth_buffering
   SHADER 27_shader_depth
-  TEXTURES ../images/texture.jpg)
-#  LIBS glm::glm)
+  TEXTURES ../images/texture.jpg
+  LIBS glm::glm)
 
 add_chapter (28_model_loading
   SHADER 27_shader_depth
   MODELS ../resources/viking_room.obj
-  TEXTURES ../resources/viking_room.png)
-#  LIBS glm::glm tinyobjloader::tinyobjloader)
+  TEXTURES ../resources/viking_room.png
+  LIBS glm::glm tinyobjloader::tinyobjloader)
 
 add_chapter (29_mipmapping
   SHADER 27_shader_depth
   MODELS ../resources/viking_room.obj
-  TEXTURES ../resources/viking_room.png)
-#  LIBS glm::glm tinyobjloader::tinyobjloader)
+  TEXTURES ../resources/viking_room.png
+  LIBS glm::glm tinyobjloader::tinyobjloader)
 
 add_chapter (30_multisampling
   SHADER 27_shader_depth
   MODELS ../resources/viking_room.obj
-  TEXTURES ../resources/viking_room.png)
-#  LIBS glm::glm tinyobjloader::tinyobjloader)
-
-add_subdirectory(external/glfw)
-add_subdirectory(external/glm)
-add_subdirectory(external/tinyobjloader)
+  TEXTURES ../resources/viking_room.png
+  LIBS glm::glm tinyobjloader::tinyobjloader)

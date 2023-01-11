@@ -1,1 +1,13 @@
 CMakeLists.txt.user
+
+# CMake clutter
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+CMakeDoxyfile.in
+CMakeDoxygenDefaults.cmake
+cmake_install.cmake
+cmake_uninstall.cmake
+
+# build dir
+build
